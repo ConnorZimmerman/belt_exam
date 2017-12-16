@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<a href="/Home">Home</a>
+<a href="/logout">Log off</a>
+
+<h1>Dojo Activity Center</h1>
+<br>
+<h2>@ViewBag.activity.name</h2>
+<h3>Event Coordinator: @ViewBag.activity.user.firstName</h3>
+<h3>Description:</h3>
+<p>@ViewBag.activity.description</p>
+<h3>Participants:</h3>
+@foreach(var person in @ViewBag.activity.attendees){
+    <p>@person.user.firstName</p>
+}
+<br>
+@{
+    bool checkAction = true;
+@foreach(var person in @ViewBag.activity.attendees){
+    @if(@ViewBag.activity.user.id == @ViewBag.userId)
+    {
+        <button><a href="/delete_activity/@ViewBag.activity.id">Delete</a></button>
+        checkAction = false;
+        break;
+    }
+    else if(@person.user.id == @ViewBag.userId){
+        <button><a href="/remove_attendee/@person.id">Leave</a></button>
+        checkAction = false;
+    }
+}
+@if(checkAction){
+    <button><a href="/add_attendee/@ViewBag.activity.id">Join</a></button>
+}
+}

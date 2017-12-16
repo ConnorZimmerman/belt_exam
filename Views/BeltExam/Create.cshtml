@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model belt_exam.Models.ActivityViewModels
+<a href="/Home">Home</a>
+<a href="/logout">Log off</a>
+<h1>Dojo Activity Center</h1>
+<br>
+<form asp-controller="BeltExam" asp-action="CreateActivity" method="post">
+    <label asp-for="name"></label>
+    <input asp-for="name">
+    <span asp-validation-for="name"></span>
+    <br>
+    <label asp-for="date"></label>
+    <input asp-for="date">
+    <span asp-validation-for="date"></span>
+    <br>
+    <label asp-for="timeOfEvent"></label>
+    <input asp-for="timeOfEvent" />
+    <span asp-validation-for="timeOfEvent"></span>
+    <br>
+    <label asp-for="timeDurInt"></label>
+    <input asp-for="timeDurInt"/>
+    <span asp-validation-for="timeDurInt"></span>
+    <select asp-for="timeType">
+        <option></option>
+        <option>Minutes</option>
+        <option>Hours</option>
+        <option>Days</option>
+    </select>
+    <span asp-validation-for="timeType"></span>
+    <br>
+    <label asp-for="description"></label>
+    <textarea asp-for="description"></textarea>
+    <span asp-validation-for="description"></span>
+    <input type="hidden" asp-for="userId" value=@ViewBag.userId/>
+    <br>
+    <input type="submit" value="Submit">
+</form>

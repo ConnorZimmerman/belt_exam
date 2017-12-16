@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<a href="/logout">Log off</a>
+<br>
+<h1>Dojo Activity Center</h1>
+<h6>Welcome @ViewBag.user.firstName!</h6>
+<table>
+    <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>Number of Participants</th>
+        <th>Action</th>
+    </tr>
+@{
+@foreach(var activity in @ViewBag.activities){
+    bool checkAction = true;
+    <tr>
+        <td><a href="/activity/@activity.id">@activity.name</a></td>
+        <td>@activity.date.ToString("M/dd") @@ @activity.timeOfEvent</td>
+        <td>@activity.timeDurInt @activity.timeType</td>
+        <td>@activity.user.firstName</td>
+        <td>@activity.attendees.Count</td>
+        @if(@activity.user.id == @ViewBag.user.id)
+        {
+            <td><a href="/delete_activity/@activity.id">Delete</a></td>
+        }
+        else{
+            @foreach(var person in @activity.attendees){
+                @if(person.user.id == @ViewBag.user.id){
+                    <td><a href="remove_attendee/@person.id">Leave</a></td>
+                    checkAction = false;
+                }
+                
+            }
+            @if(checkAction){
+                <td><a href="/add_attendee/@activity.id">Join</a></td>
+                checkAction = false;
+            }
+        }
+    </tr>
+}
+}
+</table>
+<br>
+<a href="/New"><button>Add a new activity!</button></a>

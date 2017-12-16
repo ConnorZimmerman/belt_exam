@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model belt_exam.Models.RegisterViewModels
+<div>
+    <h3>Register</h3>
+    <form asp-controller="Home" asp-action="RegisterUser" method="post">
+        <label asp-for="firstName"></label>
+        <input asp-for="firstName">
+        <span asp-validation-for="firstName"></span>
+        <br>
+        <label asp-for="lastName"></label>
+        <input asp-for="lastName">
+        <span asp-validation-for="lastName"></span>
+        <br>
+        <label asp-for="email"></label>
+        <input asp-for="email" />
+        <span asp-validation-for="email"></span>
+        <br>
+        <label asp-for="psw"></label>
+        <input asp-for="psw" />
+        <span asp-validation-for="psw"></span>
+        <br>
+        <label asp-for="conPassword"></label>
+        <input asp-for="conPassword" />
+        <span asp-validation-for="conPassword"></span>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+<p>@ViewBag.emailError</p>
